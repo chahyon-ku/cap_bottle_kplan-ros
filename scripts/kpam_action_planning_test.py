@@ -42,8 +42,8 @@ def run_kpam_action_planning():
     T_action[0, 3] = result.T_action.position.x
     T_action[1, 3] = result.T_action.position.y
     T_action[2, 3] = result.T_action.position.z
-    print 'The result on client'
-    print T_action
+    print('The result on client')
+    print(T_action)
 
     # Print the result
     keypoint_loc = np.zeros(shape=(3, 3))

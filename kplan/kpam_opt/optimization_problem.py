@@ -5,6 +5,7 @@ try:
     from pydrake.solvers.mathematicalprogram import MathematicalProgram, SolutionResult
 except ImportError:
     from pydrake.all import MathematicalProgram, Solve
+from pydrake.all import MathematicalProgram, Solve
 
 @attr.s
 class OptimizationProblemkPAM(object):
@@ -37,13 +38,15 @@ class OptimizationProblemkPAM(object):
 
 
 def solve_kpam(problem):  # type: (OptimizationProblemkPAM) -> bool
-    result = problem.mp.Solve()
+    # result = problem.mp.Solve()
+    result = Solve(problem.mp)
     if not result is not SolutionResult.kSolutionFound:
         problem.has_solution = False
         return False
 
     # Save the result to problem
-    problem.xyzrpy_sol = problem.mp.GetSolution(problem.xyzrpy)
+    print(result.get_x_val())
+    problem.xyzrpy_sol = result.get_x_val()#problem.mp.GetSolution(problem.xyzrpy)
     T_eps = SE3_utils.xyzrpy_to_matrix(xyzrpy=problem.xyzrpy_sol)
     problem.T_action = np.dot(problem.T_init, T_eps)
     problem.has_solution = True

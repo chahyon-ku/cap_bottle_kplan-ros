@@ -1,6 +1,6 @@
 import numpy as np
 import kplan.utils.SE3_utils as SE3_utils
-from optimization_problem import OptimizationProblemkPAM
+from kplan.kpam_opt.optimization_problem import OptimizationProblemkPAM
 
 
 def keypoint_l2_cost(problem, from_keypoints, goal_keypoints, weight, xyzrpy):
